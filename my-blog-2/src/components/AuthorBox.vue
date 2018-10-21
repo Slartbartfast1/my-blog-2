@@ -17,5 +17,6 @@
     background-color:#FFF;
     border:1px solid rgba(0,0,0,.1);
     margin-top:30px;
+    
 }
 </style>
