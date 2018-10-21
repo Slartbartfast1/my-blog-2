@@ -1,10 +1,13 @@
 import Vue from 'vue'
-import App from './App.vue'
+import Index from './Index.vue'
 import router from './router'
+import store from './store'
+import './plugins/iview.js'
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: h => h(App)
+  store,
+  render: h => h(Index)
 }).$mount('#app')
