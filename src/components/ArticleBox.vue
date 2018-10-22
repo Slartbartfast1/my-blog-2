@@ -1,3 +1,4 @@
+-
 <template>
     <Card dis-hover="true">
         <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="large"/>
@@ -19,6 +20,9 @@
         </div>
         <div class="boxBottom">
             <Icon type="ios-thumbs-up-outline" size="30"/>
+            <span class="good"> 1111</span>
+            <div class="comment"><span>40 responses </span><Icon type="ios-text-outline" size="36"/></div>
+
         </div>
     </Card>
 
@@ -43,7 +47,6 @@
 
         }
         .info {
-            /*width:70px;*/
             height: 50px;
             position: absolute;
             top: 25px;
@@ -57,10 +60,10 @@
                 cursor: default;
             }
         }
-        .ivu-icon-ios-star{
-            position:absolute;
-            right:20px;
-            top:30px;
+        .ivu-icon-ios-star {
+            position: absolute;
+            right: 20px;
+            top: 30px;
         }
 
         .imgTitle {
@@ -95,6 +98,19 @@
         }
         .boxBottom {
             padding-top: 10px;
+            position: relative;
+            .good {
+                text-indent: 6px;
+                position: absolute;
+                top: 18px;
+                left: 30px;
+            }
+            .comment{
+                position:absolute;
+                right:0;
+                top:15px;
+                color:rgba(0,0,0,.54)
+            }
         }
     }
 </style>
