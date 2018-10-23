@@ -15,7 +15,7 @@
 <style scoped lang="scss">
     .head {
         width: 100%;
-        height: 60px;
+        height: 64px;
         background-color: #FFF;
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
         position:relative;
