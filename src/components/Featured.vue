@@ -31,25 +31,33 @@
 </template>
 
 <script>
+
     export default {
         name: "Featured",
         mounted: function () {
-            this.getFeatured()
+            this.getFeatured();
+            this.getLatest();
         },
         data() {
             return {
-                article: [],
+               featured: [],
+                latest:[],
             }
         },
         methods: {
             getFeatured() {
-                var $sql=require('../API/sql.js')
-                let select = "select * from article where top=1";
-                let push = function (res) {
-                    console.log(res)
-                }
-                $sql.mySelect(select, push);
+                this.$http.get('http://localhost:8001/featured')
+                    .then((res)=>{
+                        this.featured=res.body
+                    })
+            },
+            getLatest(){
+                this.$http.get('http://localhost:8001/latest')
+                    .then((res)=>{
+                    this.latest=res.body
+                })
             }
+
         }
     }
 </script>
