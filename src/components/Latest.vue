@@ -1,39 +1,55 @@
 -
 <template>
-    <Card dis-hover="true">
-        <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="large"/>
-        <div class="info">
-            <span class="author"><div>泛银河系含漱爆破液</div></span>
-            <i class="date">
-                <div>Oct 16 · 5 min</div>
-            </i>
-        </div>
+    <div class="latest">
+        <Card dis-hover="true" v-for="item in latest">
+            <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="large"/>
+            <div class="info">
+                <span class="author"><div>{{item.author}}</div></span>
+                <i class="date">
+                    <div>{{item.createTime}}</div>
+                </i>
+            </div>
+            <div class="imgTitle"><img
+                    src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
+                    alt="标题图片"></div>
+            <div class="title">
+                <p>{{item.title}}</p>
+            </div>
+            <div class="summary">
+                <i>{{item.gist}}</i>
+            </div>
+            <div class="boxBottom">
+                <Icon type="ios-thumbs-up-outline" size="30"/>
+                <span class="good"> 1111</span>
+                <div class="comment"><span>{{item.view}} responses </span>
+                    <Icon type="ios-text-outline" size="36"/>
+                </div>
 
+            </div>
 
-        
-        <div class="imgTitle"><img
-                src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
-                alt="标题图片"></div>
-        <div class="title">
-            <p>泛银河系含漱爆破液</p>
-        </div>
-        <div class="summary">
-            <i>summarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummary</i>
-        </div>
-        <div class="boxBottom">
-            <Icon type="ios-thumbs-up-outline" size="30"/>
-            <span class="good"> 1111</span>
-            <div class="comment"><span>40 responses </span><Icon type="ios-text-outline" size="36"/></div>
-
-        </div>
-    </Card>
-
-
+        </Card>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "Latest"
+        name: "Latest",
+        mounted:function(){
+            this.getLatest()
+        },
+        data(){
+            return{
+                latest:[],
+            }
+        },
+        methods:{
+            getLatest(){
+                this.$http.get('http://localhost:8001/latest')
+                    .then((res)=>{
+                        this.latest=res.body
+                    })
+            }
+        }
     }
 </script>
 
@@ -53,7 +69,6 @@
             position: absolute;
             top: 25px;
             left: 70px;
-
             .author {
                 font-size: 12px;
                 cursor: pointer;
