@@ -1,18 +1,62 @@
 <template>
-  <div class="layout">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <Row type="flex" justify="center" class="featured">
+            <Col span="15">
+                <Affix v-show="this.show">
+                <div class="cate">
+                    <a href="#">
+                        <Icon type="md-pricetag"/>
+                    </a>
+                    <b>Featured</b>
+                </div>
+                </Affix>
+                <Featured></Featured>
+            </Col>
+        </Row>
+        <Row type="flex" justify="center" class="featured">
+            <Col span="15">
+                <Affix  @on-change="mission">
+                <div class="cate">
+                    <a href="#">
+                        <Icon type="md-pricetag"/>
+                    </a>
+                    <b>Latest</b>
+                </div>
+                </Affix>
+                <Latest></Latest>
+            </Col>
+        </Row>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    import Featured from '../components/Featured.vue'
+    import Latest from '../components/Latest.vue'
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+
+    export default {
+        name: 'home',
+        components: {
+            Featured,
+            Latest,
+        },
+        data(){
+            return{
+                show:true
+            }
+        },
+        methods:{
+            mission:function(){
+                return this.show=!this.show
+            }
+        }
+    }
 </script>
+<style scoped lang="scss">
+    .cate{
+        color:black;
+        font-size: 25px;
+        font-weight: 400;
+
+    }
+</style>
