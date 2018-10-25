@@ -1,30 +1,3 @@
-//
-// var featured=require('API/featured')
-// const bodyParser = require('body-parser');
-// const express = require('express');
-// const app = express();
-//
-//
-//
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
-//
-// app.use('/api/featured',featured)
-//
-//
-//
-// export default app => {
-//   // app.use(express.json());
-//   //
-//   //
-//   // app.get('/foo', (req, res) => {
-//   //   res.json({msg: 'foo'});
-//   // });
-//   // //
-//   // app.post('/bar', (req, res) => {
-//   //   res.json(req.body);
-//   // });
-// }
 const express = require('express');
 const app = express();
 const $sql = require('./API/sql')
@@ -41,7 +14,7 @@ app.all('*', function (req, res, next) {
 
 //精选
 app.get('/featured', (req, res) => {
-    $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where top=1 and articleid!=228`, (data) => {
+    $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where top=1 and articleid!=228 `, (data) => {
         let rows = JSON.stringify(data);
         res.send(rows)
     })
@@ -49,11 +22,19 @@ app.get('/featured', (req, res) => {
 
 //时间排序
 app.get('/latest', (req, res) => {
-    $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where top=2 and articleid!=228 order by createTime desc`, (data) => {
+    let params=+req.query.load||4;
+    $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where top=2 and articleid!=228 order by createTime desc limit 0,${params} `, (data) => {
         let rows = JSON.stringify(data);
         res.send(rows)
     })
 });
+
+app.get('/tags',(req,res)=>{
+    $sql.mySelect(`select categories from categories `,(data)=>{
+        let rows=JSON.stringify(data);
+        res.send(rows)
+    })
+})
 
 
 app.listen(8001, () => {
