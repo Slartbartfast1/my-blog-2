@@ -1,32 +1,35 @@
 <template>
-    <Card dis-hover="true">
-        <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="large"/>
-        <div class="info">
-            <span class="author"><div>泛银河系含漱爆破液</div></span>
-            <i class="date">
-                <div>Oct 16 · 5 min</div>
-            </i>
-        </div>
-        <Icon type="ios-star" size="20"/>
-        <div class="imgTitle"><img
-                src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
-                alt="标题图片"></div>
-        <div class="title">
-            <p>泛银河系含漱爆破液</p>
-        </div>
-        <div class="summary">
-            <i>summarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummarysummary</i>
-        </div>
-        <div class="boxBottom">
-            <Icon type="ios-thumbs-up-outline" size="30"/>
-            <span class="good"> 1111</span>
-            <div class="comment"><span>40 responses </span>
-                <Icon type="ios-text-outline" size="36"/>
+    <div class="featured">
+        <Card v-for="item in featured">
+            <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>
+            <div class="info">
+                <span class="author"><div>{{item.author}}</div></span>
+                <i class="date">
+                    <div>{{item.createTime}}</div>
+                </i>
+            </div>
+            <Icon type="ios-star" size="20"/>
+            <div class="imgTitle"><img
+                    src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
+                    alt="标题图片"></div>
+            <div class="title">
+                <p>{{item.title}}</p>
+            </div>
+            <div class="summary">
+                <i>{{item.gist}}</i>
+            </div>
+            <div class="boxBottom">
+                <Icon type="ios-thumbs-up-outline" size="26"/>
+                <span class="good"> 1111</span>
+                <div class="comment"><span>{{item.view}} responses </span>
+                    <Icon type="ios-text-outline" size="26"/>
+                </div>
+
             </div>
 
-        </div>
-    </Card>
+        </Card>
 
+    </div>
 
 </template>
 
@@ -35,28 +38,22 @@
     export default {
         name: "Featured",
         mounted: function () {
-            this.getFeatured();
-            this.getLatest();
-        },
+            this.getFeatured()
+        }
+        ,
         data() {
             return {
-               featured: [],
-                latest:[],
+                featured: [],
             }
         },
         methods: {
             getFeatured() {
                 this.$http.get('http://localhost:8001/featured')
-                    .then((res)=>{
-                        this.featured=res.body
+                    .then((res) => {
+                        this.featured = res.body
                     })
             },
-            getLatest(){
-                this.$http.get('http://localhost:8001/latest')
-                    .then((res)=>{
-                    this.latest=res.body
-                })
-            }
+
 
         }
     }
@@ -64,13 +61,14 @@
 
 <style scoped lang="scss">
 
-    * {
+    .ivu-card {
         user-select: none;
+        position: relative;
 
         .ivu-avatar {
-            height: 50px;
-            width: 50px;
-            border-radius: 25px;
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
 
         }
         .info {
@@ -90,13 +88,12 @@
         .ivu-icon-ios-star {
             position: absolute;
             right: 20px;
-            top: 30px;
+            top: 20px;
         }
 
         .imgTitle {
             margin-top: 10px;
             text-align: center;
-            padding: 10px 0;
             img {
                 height: 200px;
                 width: 100%;
@@ -105,8 +102,8 @@
 
         .title {
             color: black;
-            font-size: 30px;
-            font-weight: 300;
+            font-size: 20px;
+            font-weight: 400;
             cursor: pointer;
         }
         .summary {
@@ -116,12 +113,15 @@
                 display: block;
                 height: 100%;
                 width: 100%;
+                top: 0;
+                left: 0;
                 background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .7) 100%);
             }
             position: relative;
             word-break: break-word;
             color: rgba(0, 0, 0, .7);
-            font-size: 16px;
+            font-size: 12px;
+
         }
         .boxBottom {
             padding-top: 10px;
@@ -129,13 +129,15 @@
             .good {
                 text-indent: 6px;
                 position: absolute;
-                top: 18px;
-                left: 30px;
+                font-size: 12px;
+                top: 16px;
+                left: 20px;
             }
             .comment {
                 position: absolute;
                 right: 0;
                 top: 15px;
+                font-size: 12px;
                 color: rgba(0, 0, 0, .54)
             }
         }
