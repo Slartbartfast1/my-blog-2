@@ -1,6 +1,11 @@
 <template>
     <div class="tagBox">
-        <div class="tag" v-for="item in tags">{{item.categories}}</div>
+        <router-link :to="{path:'/'}">
+            <div class="tag icon"><Icon type="md-home" size="22"/></div>
+        </router-link>
+        <router-link v-for="item in tags" :to="{path:'/tag',query:{tag:item.id,name:item.categories}}">
+        <div class="tag">{{item.categories}}</div>
+        </router-link>
     </div>
 </template>
 
@@ -20,7 +25,7 @@
         },
         methods: {
             getTags: function(){
-                this.$http.get('http://localhost:8001/tags')
+                this.$http.get('http://localhost:8001/tags/name')
                     .then((res) => {
                         this.tags = res.body
                     })
@@ -34,6 +39,7 @@
         margin: 48px auto 48px auto;
         text-align: center;
         vertical-align: center;
+
         .tag {
             cursor: pointer;
             display: inline-block;
@@ -50,6 +56,9 @@
                 background-color: rgb(0, 133, 161);
                 color: white;
             }
+        }
+        .ivu-icon-md-home{
+            margin-top:-4px;
         }
     }
 
