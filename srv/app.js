@@ -29,8 +29,17 @@ app.get('/latest', (req, res) => {
     })
 });
 
-app.get('/tags',(req,res)=>{
-    $sql.mySelect(`select categories from categories `,(data)=>{
+app.get('/tags/name',(req,res)=>{
+    $sql.mySelect(`select * from categories`,(data)=>{
+        let rows=JSON.stringify(data);
+        res.send(rows)
+    })
+})
+
+
+app.get('/tags/article',(req,res)=>{
+    let id=req.query.tag;
+    $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where articleid!=228 and category=`+id,(data)=>{
         let rows=JSON.stringify(data);
         res.send(rows)
     })
