@@ -5,7 +5,7 @@
         <HeadNav></HeadNav>
 </Header>
         <Content>
-        <Row type="flex" justify="center">
+        <Row type="flex" justify="center" id="hero">
             <Col span="15" >
                 <AuthorBox></AuthorBox>
             </Col>
@@ -36,6 +36,23 @@
 
 <style lang="scss">
     #app {
+        .highlight{
+            &:after{
+                display:block;
+                content: "";
+                height: 3px;
+                width: 0px;
+                background-color: #0082a7;
+                transition: width .5s ease;
+            }
+            &:hover{
+                &:after{
+                    width:100%;
+                }
+
+            }
+        }
+
         .ivu-card{
             margin:48px 0 ;
         }
