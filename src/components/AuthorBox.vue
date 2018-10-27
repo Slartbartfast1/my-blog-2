@@ -1,9 +1,10 @@
 <template>
-    <div class="author">
-
-        <div class="avatar"><img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
+    <div class="author"  id="hero">
+        <div class="avatar animated" v-bind:class="random" @click="animation" ><img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
                                  alt=""></div>
-        <div class="nickName"><h1>泛银河系含漱爆破液</h1>
+        <div class="nickName">
+            <h1 class="highlight">泛银河系含漱爆破液</h1>
+            <div></div>
             <ButtonGroup>
                 <Button icon="logo-github" type="dashed"></Button>
                 <Button icon="ios-chatbubbles" type="dashed"></Button>
@@ -11,23 +12,76 @@
                 <Button icon="ios-at" type="dashed"></Button>
             </ButtonGroup>
         </div>
+        <divider></divider>
         <div class="search">
             <Icon type="ios-search" size="66"/>
-            <input class="input" type="search" autocomplete="off" placeholder="搜索博文">
+            <input class="input" type="search" autocomplete="off" placeholder="Search the blog">
         </div>
-        <div class="tags">
-            <Tag color="primary" checkable>标签一</Tag>
-            <Tag color="primary" checkable>标签一</Tag>
-            <Tag color="primary" checkable>标签一</Tag>
-        </div>
-        <divider></divider>
-
+<Tags></Tags>
     </div>
 </template>
 
 <script>
+    import 'animate.css'
+    import Tags from '../components/Tags'
     export default {
-        name: "AuthorBox"
+        name: "AuthorBox",
+        components:{
+            Tags
+        },
+        data() {
+            return {
+                animate: ['bounce',
+                    'flash',
+                    'pulse',
+                    'rubberBand',
+                    'shake',
+                    'headShake',
+                    'swing',
+                    'tada',
+                    'wobble',
+                    'jello',
+                    'bounceIn',
+                    'bounceInDown',
+                    'bounceInLeft',
+                    'bounceInRight',
+                    'bounceInUp',
+                    'fadeIn',
+                    'fadeInDown',
+                    'fadeInDownBig',
+                    'fadeInLeft',
+                    'fadeInLeftBig',
+                    'fadeInRight',
+                    'fadeInRightBig',
+                    'fadeInUp',
+                    'fadeInUpBig',
+                    'flipInX',
+                    'flipInY',
+                    'lightSpeedIn',
+                    'rotateIn',
+                    'rotateInDownLeft',
+                    'rotateInDownRight',
+                    'rotateInUpLeft',
+                    'rotateInUpRight',
+                    'jackInTheBox',
+                    'rollIn',
+                    'zoomIn',
+                    'zoomInDown',
+                    'zoomInLeft',
+                    'zoomInRight',
+                    'zoomInUp',
+                    'heartBeat'],
+                random:'tada',
+
+            }
+        },
+        methods:{
+            animation:function(){
+                var num=Math.random()*this.animate.length;
+                this.random=this.animate[num.toFixed(0)];
+                console.log(this.random)
+            }
+        }
     }
 </script>
 
@@ -38,7 +92,11 @@
         position: relative;
 
         .avatar {
+
+            cursor: pointer;
             margin: 96px auto 0 auto;
+position:relative;
+            top:-50px;
             width: 160px;
             height: 160px;
             border-radius: 80px;
@@ -50,11 +108,15 @@
             }
         }
         .nickName {
-
             display: block;
             margin: 20px auto 0 auto;
             text-align: center;
+            h1{
+                display: inline-block;
+            }
+
             .ivu-btn-group {
+                /*display: block;*/
                 margin-top: 10px;
                 .ivu-btn {
                     margin: 0 6px;
@@ -75,6 +137,8 @@
             .ivu-icon-ios-search {
                 color: #c7c9c9;
                 margin-bottom: 16px;
+                transition:.3s ease all;
+
             }
             .input {
                 border: none;
@@ -94,18 +158,7 @@
             }
 
         }
-        .tags {
-            margin: 30px auto 0 auto;
-            width: 90%;
-            height: 100px;
-            display: flex;
-            justify-content: center;
 
-            flex-wrap: wrap;
-            .ivu-tag {
-                margin: 10px 10px;
-            }
-        }
 
     }
 </style>
