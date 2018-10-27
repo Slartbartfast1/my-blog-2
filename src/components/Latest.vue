@@ -1,7 +1,7 @@
--
+
 <template>
-    <div class="latest">
-        <Card dis-hover="true" v-for="item in latest">
+    <div class="latest" :on-reach-edge="getLatest">
+        <Card v-for="item in latest">
             <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="large"/>
             <div class="info">
                 <span class="author"><div>{{item.author}}</div></span>
@@ -19,10 +19,10 @@
                 <i>{{item.gist}}</i>
             </div>
             <div class="boxBottom">
-                <Icon type="ios-thumbs-up-outline" size="30"/>
+                <Icon type="ios-thumbs-up-outline" size="26"/>
                 <span class="good"> 1111</span>
                 <div class="comment"><span>{{item.view}} responses </span>
-                    <Icon type="ios-text-outline" size="36"/>
+                    <Icon type="ios-text-outline" size="26"/>
                 </div>
 
             </div>
@@ -40,11 +40,12 @@
         data(){
             return{
                 latest:[],
+                num:1,
             }
         },
         methods:{
             getLatest(){
-                this.$http.get('http://localhost:8001/latest')
+                this.$http.get("http://localhost:8001/latest")
                     .then((res)=>{
                         this.latest=res.body
                     })
@@ -55,13 +56,14 @@
 
 <style scoped lang="scss">
 
-    * {
+    .ivu-card {
         user-select: none;
+        position: relative;
 
         .ivu-avatar {
-            height: 50px;
-            width: 50px;
-            border-radius: 25px;
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
 
         }
         .info {
@@ -69,6 +71,7 @@
             position: absolute;
             top: 25px;
             left: 70px;
+
             .author {
                 font-size: 12px;
                 cursor: pointer;
@@ -80,13 +83,12 @@
         .ivu-icon-ios-star {
             position: absolute;
             right: 20px;
-            top: 30px;
+            top: 20px;
         }
 
         .imgTitle {
             margin-top: 10px;
             text-align: center;
-            padding: 10px 0;
             img {
                 height: 200px;
                 width: 100%;
@@ -95,8 +97,8 @@
 
         .title {
             color: black;
-            font-size: 30px;
-            font-weight: 300;
+            font-size: 20px;
+            font-weight: 400;
             cursor: pointer;
         }
         .summary {
@@ -106,12 +108,15 @@
                 display: block;
                 height: 100%;
                 width: 100%;
+                top: 0;
+                left: 0;
                 background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .7) 100%);
             }
             position: relative;
             word-break: break-word;
             color: rgba(0, 0, 0, .7);
-            font-size: 16px;
+            font-size: 12px;
+
         }
         .boxBottom {
             padding-top: 10px;
@@ -119,14 +124,16 @@
             .good {
                 text-indent: 6px;
                 position: absolute;
-                top: 18px;
-                left: 30px;
+                top: 16px;
+                left: 20px;
+                font-size: 10px;
             }
-            .comment{
-                position:absolute;
-                right:0;
-                top:15px;
-                color:rgba(0,0,0,.54)
+            .comment {
+                position: absolute;
+                right: 0;
+                top: 15px;
+                font-size: 12px;
+                color: rgba(0, 0, 0, .54)
             }
         }
     }
