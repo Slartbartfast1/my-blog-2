@@ -13,7 +13,6 @@
                 <TagComponent></TagComponent>
             </Col>
         </Row>
-
     </div>
 </template>
 
