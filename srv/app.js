@@ -12,6 +12,7 @@ app.all('*', function (req, res, next) {
     next();
 });
 
+
 //精选
 app.get('/featured', (req, res) => {
     $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where top=1 and articleid!=228 `, (data) => {
@@ -29,6 +30,7 @@ app.get('/latest', (req, res) => {
     })
 });
 
+//获得标签名称
 app.get('/tags/name',(req,res)=>{
     $sql.mySelect(`select * from categories`,(data)=>{
         let rows=JSON.stringify(data);
@@ -36,7 +38,7 @@ app.get('/tags/name',(req,res)=>{
     })
 })
 
-
+//获得文章列表
 app.get('/tags/article',(req,res)=>{
     let id=req.query.tag;
     $sql.mySelect(`select title,gist,createTime,author,imgurl,category,view from article where articleid!=228 and category=`+id,(data)=>{
@@ -48,7 +50,7 @@ app.get('/tags/article',(req,res)=>{
 
 app.listen(8001, () => {
     console.log('连接成功');
-})
+});
 
 
 
