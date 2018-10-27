@@ -19,19 +19,24 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-let mailOptions = {
-    from: '"hello" <1019118008@qq.com>', // sender address
-    to: emailTo, // list of receivers
-    subject: emailSubject, // Subject line
-    // 发送text或者html格式
-    // text: 'Hello world?', // plain text body
-    html: emailContent // html body
-};
+
+function sendMail(emailTo,emailSubject,emailContent){
+    let mailOptions = {
+        from: '"泛银河系含漱爆破液" <1019118008@qq.com>', // sender address
+        to: emailTo, // list of receivers
+        subject: emailSubject, // Subject line
+        // 发送text或者html格式
+        // text: 'Hello world?', // plain text body
+        html: emailContent // html body
+    };
 
 // send mail with defined transport object
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-});
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+    });
+}
+
+module.exports=sendMail;
