@@ -2,9 +2,9 @@
 
 
 
-var emailTo='1019118008@qq.com';
-var emailSubject='HEllo'
-var emailContent='<b>有人回复你了</b>';
+// var emailTo='1019118008@qq.com';
+// var emailSubject='HEllo'
+// var emailContent='<b>有人回复你了</b>';
 
 const nodemailer = require('nodemailer');
 
