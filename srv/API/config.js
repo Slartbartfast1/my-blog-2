@@ -1,5 +1,5 @@
 
-var connection={
+const connection={
     info:{
         host:'localhost',
         user:'root',
