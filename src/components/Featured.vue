@@ -1,6 +1,7 @@
 <template>
-    <div class="featured">
-        <Card v-for="item in featured">
+    <div class="featured" >
+
+        <Card  v-for="item in featured" >
             <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>
             <div class="info">
                 <span class="author"><div>{{item.author}}</div></span>
@@ -10,10 +11,12 @@
             </div>
             <Icon type="ios-star" size="20"/>
             <div class="imgTitle"><img
-                    src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
+                    :src="'https://58.87.107.26/'+item.imgurl"
                     alt="标题图片"></div>
             <div class="title">
-                <p>{{item.title}}</p>
+                <router-link :to="{path:'/article',query:{id:item.articleid}}">
+                    <p>{{item.title}}</p>
+                </router-link>
             </div>
             <div class="summary">
                 <i>{{item.gist}}</i>
@@ -24,11 +27,8 @@
                 <div class="comment"><span>{{item.view}} responses </span>
                     <Icon type="ios-text-outline" size="26"/>
                 </div>
-
             </div>
-
         </Card>
-
     </div>
 
 </template>
