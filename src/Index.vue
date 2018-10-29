@@ -16,6 +16,7 @@
             AuthorBox,
         },
     }
+
 </script>
 
 <style lang="scss">
