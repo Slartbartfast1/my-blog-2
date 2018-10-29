@@ -1,6 +1,6 @@
 <template>
     <div class="tags">
-        <Card v-for="item in tags">
+        <Card v-for="(item,index) in tags" :key="item.slug">
             <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>
             <div class="info">
                 <span class="author"><div>{{item.author}}</div></span>
@@ -9,11 +9,11 @@
                 </i>
             </div>
             <Icon type="ios-star" size="20"/>
-            <div class="imgTitle"><img
-                    src="https://slartbartfast.cn/static/assets/img/ES6%E4%B9%8Blet%E5%92%8Cconstwallhaven-39700_gaitubao_com_1135x480.jpg"
-                    alt="标题图片"></div>
+            <div class="imgTitle" v-html="html[index]">{{html[index]}}</div>
             <div class="title">
+                <router-link :to="{path:'/article',query:{id:item.articleid}}">
                 <p>{{item.title}}</p>
+                    </router-link>
             </div>
             <div class="summary">
                 <i>{{item.gist}}</i>
@@ -24,9 +24,7 @@
                 <div class="comment"><span>{{item.view}} responses </span>
                     <Icon type="ios-text-outline" size="26"/>
                 </div>
-
             </div>
-
         </Card>
 
     </div>
@@ -46,13 +44,19 @@
         data() {
             return {
                 tags: [],
+                html:[],
             }
         },
         methods: {
             getArticleByTag() {
-                this.$http.get('http://localhost:8001/tags/article?tag='+this.$route.query.tag)
+                this.$http.get(`http://localhost:8001/tags/article?tag=${this.$route.query.tag}`)
                     .then((res) => {
                         this.tags = res.body
+                        this.html=[];
+                        this.tags.forEach((el)=>{
+                            let img=`<img src="https://58.87.107.26/${el.imgurl}" alt="标题图片" style="width:100%;height:100%">`
+                            this.html.push(img)
+                        })
                     })
             },
 
@@ -96,10 +100,7 @@
         .imgTitle {
             margin-top: 10px;
             text-align: center;
-            img {
-                height: 200px;
-                width: 100%;
-            }
+            height: 200px;
         }
 
         .title {
