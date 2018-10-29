@@ -1,25 +1,70 @@
 <template>
-    <Content>
-        <Row type="flex" justify="center">
-            <Col span="15">
-                <AuthorBox></AuthorBox>
-            </Col>
-        </Row>
-        <router-view/>
-    </Content>
+        <Layout>
+            <Header>
+                <HeadNav></HeadNav>
+            </Header>
+            <Content>
+                <Row type="flex" justify="center">
+                    <Col span="15">
+                        <AuthorBox></AuthorBox>
+                    </Col>
+                </Row>
+                <router-view></router-view>
+            </Content>
+            <Footer>
+                <Footer1></Footer1>
+            </Footer>
+        </Layout>
 </template>
 
 <script>
-    import AuthorBox from '../components/Featured'
-    import Featured from '../components/Featured'
-    import Latest from '../components/Latest'
+    import AuthorBox from '../components/AuthorBox'
+    import FeaturedAndLatest from '../components/FeaturedAndLatest'
+    import HeadNav from '../components/HeadNav'
+    import Footer1 from '../components/Footer1'
+
     export default {
         name: "Index",
-        component:
-        AuthorBox,
+        components:{
+            AuthorBox,
+            HeadNav,
+            Footer1,
+            FeaturedAndLatest,
+        },
+
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    .highlight {
+        &:after {
+            display: block;
+            content: "";
+            height: 3px;
+            width: 0px;
+            background-color: #0082a7;
+            transition: width .5s ease;
+        }
+        &:hover {
+            &:after {
+                width: 100%;
+            }
+
+        }
+    }
+    #hero {
+        /*<!--background:no-repeat 0 -600px  url(https://cdn.vuetifyjs.com/images/parallax/material2.jpg);-->*/
+    }
+
+    .ivu-card {
+        margin: 48px 0;
+    }
+    .ivu-layout-header {
+        background-color: #ddd;
+        padding: 0;
+    }
+    .ivu-layout-content {
+        background-color: #fff;
+    }
 
 </style>
