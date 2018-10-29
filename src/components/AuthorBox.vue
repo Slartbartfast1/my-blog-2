@@ -3,7 +3,7 @@
         <div class="avatar animated" v-bind:class="random" @click="animation" ><img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
                                  alt=""></div>
         <div class="nickName">
-            <h1 class="highlight">泛银河系含漱爆破液</h1>
+            <h1 class="underline">泛银河系含漱爆破液</h1>
             <div></div>
             <ButtonGroup>
                 <Button icon="logo-github" type="dashed"></Button>
