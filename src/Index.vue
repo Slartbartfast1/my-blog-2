@@ -1,21 +1,6 @@
 <template>
     <div id="app">
-        <Layout>
-            <Header>
-                <HeadNav></HeadNav>
-            </Header>
-            <Content>
-                <Row type="flex" justify="center">
-                    <Col span="15">
-                        <AuthorBox></AuthorBox>
-                    </Col>
-                </Row>
                 <router-view/>
-            </Content>
-            <Footer>
-                <Footer1></Footer1>
-            </Footer>
-        </Layout>
     </div>
 </template>
 <script>
@@ -35,7 +20,7 @@
 
 <style lang="scss">
     #app {
-        .highlight {
+        .underline {
             &:after {
                 display: block;
                 content: "";
