@@ -22,6 +22,9 @@
                     </article>
 
                 </Col>
+                <Col>
+
+                </Col>
             </Row>
 
 
@@ -119,6 +122,11 @@
             line-height:1.5em;/*行距为1.5个单位*/
             padding:10px;/*用内边距代替外边距来设置段间距*/
             margin:0;/*去掉默认的段间距*/
+        }
+        blockquote{
+            padding: 16px 0 16px 24px;
+            font-size: 18px;
+            font-weight: 300;
         }
 
     }
