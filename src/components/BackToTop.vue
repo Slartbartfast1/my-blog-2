@@ -12,8 +12,7 @@
         },
         methods: {
             hide() {
-                console.log(window.pageYOffset)
-                if (window.pageYOffset < 1800) {
+                if (window.pageYOffset < 1400) {
                     document.getElementsByClassName('backToTop')[0].className = 'backToTop hide';
 
                 } else {
