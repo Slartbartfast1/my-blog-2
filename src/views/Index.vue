@@ -10,6 +10,7 @@
                     </Col>
                 </Row>
                 <router-view></router-view>
+                <BackToTop></BackToTop>
             </Content>
             <Footer>
                 <Footer1></Footer1>
@@ -22,6 +23,7 @@
     import FeaturedAndLatest from '../components/FeaturedAndLatest'
     import HeadNav from '../components/HeadNav'
     import Footer1 from '../components/Footer1'
+    import BackToTop from '../components/BackToTop'
 
     export default {
         name: "Index",
@@ -30,6 +32,7 @@
             HeadNav,
             Footer1,
             FeaturedAndLatest,
+            BackToTop,
         },
 
     }
