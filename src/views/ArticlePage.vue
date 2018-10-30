@@ -16,27 +16,23 @@
             </div>
             <Row type="flex" justify="center">
                 <Col span="13">
-
-
                     <article v-html="article[0].content" v-highlight>
                     </article>
-
                 </Col>
-                <Col>
-
-                </Col>
+                <BackToTop></BackToTop>
             </Row>
-
-
         </div>
     </div>
 </template>
 
 <script>
-
+    import BackToTop from '../components/BackToTop'
 
     export default {
         name: "ArticlePAge",
+        components:{
+            BackToTop
+        },
         mounted: function () {
             this.getArticle()
             document.querySelectorAll("table").forEach((el)=>{
@@ -117,11 +113,10 @@
         margin-top: 20px;
         font-size: 16px;
         p{
-            font-size:16px;/*字体大小*/
-            /*text-indent:2em;!*首行缩进两个单位*!*/
-            line-height:1.5em;/*行距为1.5个单位*/
-            padding:10px;/*用内边距代替外边距来设置段间距*/
-            margin:0;/*去掉默认的段间距*/
+            font-size:16px;
+            line-height:1.5em;
+            padding:10px;
+            margin:0;
         }
         blockquote{
             padding: 16px 0 16px 24px;
