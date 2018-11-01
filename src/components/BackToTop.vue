@@ -22,8 +22,8 @@
             goTop() {
                 var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
                 if (currentScroll > 0) {
-                    window.requestAnimationFrame(this.goTop);//检测动画帧数
-                    window.scrollTo(0, currentScroll - (currentScroll / 4));
+                    window.requestAnimationFrame(this.goTop);//最小动画帧数
+                    window.scrollTo(0, currentScroll - (currentScroll / 5));
                 }
             }
         },
@@ -45,6 +45,7 @@
         text-align: center;
         transition: .3s all ease;
         cursor: pointer;
+        border-radius: 2px;
         &:hover {
             box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, .1);
             background-color: #f7f7f7;
