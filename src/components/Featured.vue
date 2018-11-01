@@ -10,8 +10,9 @@
                 </i>
             </div>
             <Icon type="ios-star" size="20"/>
+
             <div class="imgTitle"><img
-                    :src="'https://58.87.107.26/'+item.imgurl"
+                    src="../../public/新建文件夹/个人博客技术栈总结wallhaven-442310_gaitubao_com_827x312-thumb.jpg"
                     alt="标题图片"></div>
             <div class="title">
                 <router-link :to="{path:'/article',query:{id:item.articleid}}">
@@ -94,10 +95,17 @@
         .imgTitle {
             margin-top: 10px;
             text-align: center;
+            overflow: hidden;
             img {
                 height: 200px;
                 width: 100%;
+
             }
+            .img-thumb{
+                filter:blur(20px);
+                transform: scale(1.1);
+            }
+
         }
 
         .title {
