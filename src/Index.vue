@@ -38,7 +38,7 @@
             }
         }
         #hero {
-            /*<!--background:no-repeat 0 -600px  url(https://cdn.vuetifyjs.com/images/parallax/material2.jpg);-->*/
+            background:no-repeat 0 -600px  url(https://cdn.vuetifyjs.com/images/parallax/material2.jpg);
         }
 
         .ivu-card {
