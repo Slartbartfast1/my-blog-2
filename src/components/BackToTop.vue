@@ -12,12 +12,9 @@
         },
         methods: {
             hide() {
-                if (window.pageYOffset < 1400) {
-                    document.getElementsByClassName('backToTop')[0].className = 'backToTop hide';
-
-                } else {
-                    document.getElementsByClassName('backToTop')[0].className = 'backToTop';
-                }
+                window.pageYOffset < 1400?
+                    document.getElementsByClassName('backToTop')[0].className = 'backToTop hide'
+                    : document.getElementsByClassName('backToTop')[0].className = 'backToTop';
             },
             goTop() {
                 var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -53,10 +50,8 @@
     }
 
     .hide {
-        height:0;
-        width:0;
-        right:-40px;
-        bottom:70px;
+        right:-42px;
+        transform: rotate(180deg);
     }
 
 </style>
