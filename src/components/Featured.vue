@@ -1,7 +1,6 @@
 <template>
-    <div class="featured" >
-
-        <Card  v-for="item in featured" >
+    <div class="featured">
+        <Card v-for="item in featured">
             <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>
             <div class="info">
                 <span class="author"><div>{{item.author}}</div></span>
@@ -11,9 +10,12 @@
             </div>
             <Icon type="ios-star" size="20"/>
 
-            <div class="imgTitle"><img
-                    src="../../public/新建文件夹/个人博客技术栈总结wallhaven-442310_gaitubao_com_827x312-thumb.jpg"
-                    alt="标题图片"></div>
+            <div class="imgTitle"
+                 v-src="'http://58.87.107.26/'+item.imgurl">
+                <img
+                        :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)"
+                        alt="标题图片" class="img-thumb">
+            </div>
             <div class="title">
                 <router-link :to="{path:'/article',query:{id:item.articleid}}">
                     <p>{{item.title}}</p>
@@ -56,7 +58,29 @@
             },
 
 
-        }
+        },
+        directives: {
+            src: {
+                bind: function (el, binding) {
+                    var element = new Image();
+                    element.className = "img-src"
+                    element.style.width = '100%'
+                    element.style.height = '200px'
+                    element.style.zIndex = '200'
+                    element.style.transform = 'scale(1.1)'
+                    element.src = binding.value
+                    element.style.filter='blur(20px)'
+                    element.style.transition='.3s ease all'
+                    element.onload=function(){
+                        element.style.filter='blur(0px)'
+                        element.style.transform = 'scale(1)'
+                        let obj = el.querySelector('.img-thumb')
+                        el.removeChild(obj)
+                    };
+                    el.appendChild(element)
+                },
+            }
+        },
     }
 </script>
 
@@ -93,19 +117,22 @@
         }
 
         .imgTitle {
+            height: 200px;
+            width: 100%;
             margin-top: 10px;
             text-align: center;
             overflow: hidden;
-            img {
+            position: relative;
+            .img-thumb {
+                filter: blur(10px);
+                z-index: 1;
                 height: 200px;
                 width: 100%;
-
-            }
-            .img-thumb{
-                filter:blur(20px);
+                transition: 1s all ease;
+                position: absolute;
+                left: 0;
                 transform: scale(1.1);
             }
-
         }
 
         .title {
