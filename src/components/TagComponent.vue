@@ -58,6 +58,7 @@
                     element.style.height = '200px'
                     element.style.zIndex = '200'
                     element.style.transform = 'scale(1.1)'
+
                     element.src = binding.value
                     element.style.filter = 'blur(20px)'
                     element.style.transition = '.3s ease all'
@@ -76,6 +77,7 @@
                     element.style.height = '200px'
                     element.style.zIndex = '200'
                     element.style.transform = 'scale(1.1)'
+
                     element.src = binding.value
                     element.style.filter = 'blur(20px)'
                     element.style.transition = '.3s ease all'
@@ -90,7 +92,10 @@
             }
         },
 
-        /*自定义指令生命周期
+        /*
+
+     自定义指令生命周期
+
     （1）bind： 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。
 
 　　（2）inserted： 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
@@ -109,7 +114,13 @@
                         this.tags = res.body;
                         this.html = [];
                         this.tags.forEach((el) => {
-                            var img = `<img src="http://58.87.107.26/${el.imgurl.slice(0, -4)}-thumb${el.imgurl.slice(-4)}" class="img-thumb" alt="标题图片" style="width:100%;height:100%">`
+                            var img = `<img src="http://58.87.107.26/${el.imgurl.slice(0, -4)}-thumb${el.imgurl.slice(-4)}" class="img-thumb" alt="标题图片"
+                            style="width:100%;height:100% ;
+                            filter: blur(30px);
+                            transition: 1s all ease;
+                            position: absolute;
+                            left: 0;
+                            transform: scale(1.1);">`
                             this.html.push(img)
                         })
 
@@ -161,8 +172,7 @@
             overflow: hidden;
             position: relative;
             .img-thumb {
-                filter: blur(10px);
-                z-index: 1;
+                filter: blur(60rem);
                 height: 200px;
                 width: 100%;
                 transition: 1s all ease;
