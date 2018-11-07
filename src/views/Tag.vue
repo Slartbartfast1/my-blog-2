@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Row type="flex" justify="center" class="featured">
+        <Row type="flex" justify="center" >
             <Col span="12">
                 <Affix v-show="this.show">
                     <div class="cate">
@@ -23,6 +23,7 @@
         name: 'tag',
         components: {
     TagComponent,
+
         },
         data() {
             return {
