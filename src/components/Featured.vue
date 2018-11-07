@@ -1,14 +1,14 @@
 <template>
     <div class="featured">
-        <Card v-for="item in featured">
-            <Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>
-            <div class="info">
-                <span class="author"><div>{{item.author}}</div></span>
-                <i class="date">
-                    <div>{{item.createTime}}</div>
-                </i>
-            </div>
-            <Icon type="ios-star" size="20"/>
+        <Card v-for="item in featured" :key="item.articleid">
+            <!--<Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>-->
+            <!--<div class="info">-->
+                <!--<span class="author"><div>{{item.author}}</div></span>-->
+                <!--<i class="date">-->
+                    <!--<div>{{item.createTime}}</div>-->
+                <!--</i>-->
+            <!--</div>-->
+            <!--<Icon type="ios-star" size="20"/>-->
 
             <div class="imgTitle"
                  v-src="'http://58.87.107.26/'+item.imgurl">
@@ -24,13 +24,13 @@
             <div class="summary">
                 <i>{{item.gist}}</i>
             </div>
-            <div class="boxBottom">
-                <Icon type="ios-thumbs-up-outline" size="26"/>
-                <span class="good"> 1111</span>
-                <div class="comment"><span>{{item.view}} responses </span>
-                    <Icon type="ios-text-outline" size="26"/>
-                </div>
-            </div>
+            <!--<div class="boxBottom">-->
+                <!--<Icon type="ios-thumbs-up-outline" size="26"/>-->
+                <!--<span class="good"> 1111</span>-->
+                <!--<div class="comment"><span>{{item.view}} responses</span>-->
+                    <!--<Icon type="ios-text-outline" size="26"/>-->
+                <!--</div>-->
+            <!--</div>-->
         </Card>
     </div>
 
@@ -89,37 +89,11 @@
     .ivu-card {
         user-select: none;
         position: relative;
-
-        .ivu-avatar {
-            height: 40px;
-            width: 40px;
-            border-radius: 20px;
-
-        }
-        .info {
-            height: 50px;
-            position: absolute;
-            top: 25px;
-            left: 70px;
-
-            .author {
-                font-size: 12px;
-                cursor: pointer;
-            }
-            .date {
-                cursor: default;
-            }
-        }
-        .ivu-icon-ios-star {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
-
+        border:1px solid rgba(0,0,0,.1);
         .imgTitle {
             height: 200px;
             width: 100%;
-            margin-top: 10px;
+            /*margin-top: 10px;*/
             text-align: center;
             overflow: hidden;
             position: relative;
@@ -136,8 +110,10 @@
         }
 
         .title {
+            padding:6px;
+            height:30px;
             color: black;
-            font-size: 20px;
+            font-size:2rem;
             font-weight: 400;
             cursor: pointer;
         }
@@ -152,29 +128,13 @@
                 left: 0;
                 background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .7) 100%);
             }
+            text-indent:.5em;
             position: relative;
             word-break: break-word;
             color: rgba(0, 0, 0, .7);
-            font-size: 12px;
+            font-size: .8rem;
 
         }
-        .boxBottom {
-            padding-top: 10px;
-            position: relative;
-            .good {
-                text-indent: 6px;
-                position: absolute;
-                font-size: 12px;
-                top: 16px;
-                left: 20px;
-            }
-            .comment {
-                position: absolute;
-                right: 0;
-                top: 15px;
-                font-size: 12px;
-                color: rgba(0, 0, 0, .54)
-            }
-        }
     }
+
 </style>
