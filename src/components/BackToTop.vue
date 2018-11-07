@@ -40,7 +40,7 @@
         background-color: #FFF;
         line-height: 40px;
         text-align: center;
-        transition: .3s all ease;
+        transition:all .3s  ease,background-color 0s;
         cursor: pointer;
         border-radius: 2px;
         &:hover {
@@ -48,10 +48,9 @@
             background-color: #f7f7f7;
         }
     }
-
     .hide {
-        right:-42px;
-        transform: rotate(180deg);
+        right:-41px;
+        transform: rotate(90deg);
     }
 
 </style>
