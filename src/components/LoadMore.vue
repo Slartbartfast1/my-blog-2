@@ -22,7 +22,7 @@
     height:60px;
     button{
         color:white;
-        background: linear-gradient(45deg,#2d8cf0 0%, #b2ffeb 100%);
+        background: linear-gradient(45deg,#2d8cf0 0%, #70f5ff 100%);
         line-height: 30px;
         padding:0 10px;
         outline:none;
