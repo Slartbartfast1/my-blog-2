@@ -15,7 +15,7 @@
         </Row>
         <Row type="flex" justify="center" class="featured">
             <Col span="12">
-                <Affix @on-change="mission">
+                <Affix @on-change="showUp">
                     <div class="cate">
                         <a href="#">
                             <Icon type="md-pricetag"/>
@@ -45,7 +45,7 @@
             }
         },
         methods: {
-            mission: function () {
+            showUp: function () {
                 return this.show = !this.show
             }
         }
