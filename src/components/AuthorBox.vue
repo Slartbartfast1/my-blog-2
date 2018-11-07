@@ -1,8 +1,8 @@
 <template>
-    <div class="author"  id="hero">
-        <div class="avatar animated" v-bind:class="random" @click="animation" ><img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
+    <div class="author">
+        <div class="avatar animated"  v-bind:class="random" @click="animation" ><img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
                                  alt=""></div>
-        <div class="nickName">
+        <div class="nickName" >
             <h1 class="underline">泛银河系含漱爆破液</h1>
             <div></div>
             <ButtonGroup>
@@ -13,11 +13,11 @@
             </ButtonGroup>
         </div>
         <divider></divider>
-        <div class="search">
-            <Icon type="ios-search" size="66"/>
-            <input class="input" type="search" autocomplete="off" placeholder="Search the blog">
-        </div>
-<Tags></Tags>
+        <!--<div class="search">-->
+            <!--<Icon type="ios-search" size="66"/>-->
+            <!--<input class="input" type="search" autocomplete="off" placeholder="Search the blog">-->
+        <!--</div>-->
+            <Tags></Tags>
     </div>
 </template>
 
@@ -72,7 +72,6 @@
                     'zoomInUp',
                     'heartBeat'],
                 random:'tada',
-
             }
         },
         methods:{
@@ -85,7 +84,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
     .author {
         background-color: #FFF;
         margin-top: 30px;
