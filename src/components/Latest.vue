@@ -31,17 +31,22 @@
                 </div>
             </div>
         </Card>
+        <LoadMore @load="loadMore" v-if="this.start!==this.total-4"></LoadMore>
     </div>
+
 </template>
 
 <script>
-
+    import LoadMore from '../components/LoadMore'
     export default {
         name: "Latest",
+        components:{
+            LoadMore,
+        },
         mounted:function(){
             this.getLatest();
             this.getTotal();
-            window.addEventListener('scroll', this.getMore)
+            // window.addEventListener('scroll', this.getMore)
         },
         updated:function(){
 
@@ -72,23 +77,30 @@
             getTotal(){
                 this.$http.get(`http://localhost:8001/latest?total=1`)
                     .then((res)=>{
-                        console.log(res.body[0]['num'])
                         this.total=res.body[0]['num']
                     })
             },
-            getMore(){
-if(this.start!==this.total-4){
-    if(document.body.scrollTop + window.innerHeight+1 >=
-        document.body.offsetHeight ||
-        document.documentElement.scrollTop + window.innerHeight+1 >=
-        document.body.offsetHeight){
-        this.start+=4;
-        this.$http.get(`http://localhost:8001/latest?size=${this.size}&=${this.start}`)
-            .then((res)=>{
-                this.latest=this.latest.concat(res.body)
-            })
-    }
-}
+//             getMore(){
+// if(this.start!==this.total-4){
+//     if(document.body.scrollTop + window.innerHeight+1 >=
+//         document.body.offsetHeight ||
+//         document.documentElement.scrollTop + window.innerHeight+1 >=
+//         document.body.offsetHeight){
+//         this.start+=4;
+//         this.$http.get(`http://localhost:8001/latest?size=${this.size}&=${this.start}`)
+//             .then((res)=>{
+//                 this.latest=this.latest.concat(res.body)
+//             })
+//     }
+// }
+//             },
+            loadMore(){
+                this.start+=4;
+                this.$http.get(`http://localhost:8001/latest?size=${this.size}&start=${this.start}`)
+                    .then((res)=>{
+                        this.latest=this.latest.concat(res.body)
+                        console.log(this.latest)
+                    })
             }
         },
         directives: {
