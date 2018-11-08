@@ -1,6 +1,6 @@
 <template>
     <div class="load">
-        <button @click="load">Load More<Icon type="ios-arrow-down"size="16" /></button>
+        <button @click="load">Load More<Icon type="ios-arrow-down" size="16" /></button>
     </div>
 </template>
 
