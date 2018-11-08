@@ -1,15 +1,6 @@
 <template>
     <div class="featured">
         <Card v-for="item in featured" :key="item.articleid">
-            <!--<Avatar src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png" size="small"/>-->
-            <!--<div class="info">-->
-                <!--<span class="author"><div>{{item.author}}</div></span>-->
-                <!--<i class="date">-->
-                    <!--<div>{{item.createTime}}</div>-->
-                <!--</i>-->
-            <!--</div>-->
-            <!--<Icon type="ios-star" size="20"/>-->
-
             <div class="imgTitle"
                  v-src="'http://58.87.107.26/'+item.imgurl">
                 <img
