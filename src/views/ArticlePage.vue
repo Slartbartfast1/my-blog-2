@@ -1,6 +1,8 @@
 <template>
+    <Layout>
+        <Content>
     <div>
-        <div v-for="item in article">
+        <div v-for="item in article" :key="item.articleid">
             <div class="imgTitle" :style="background">
                 <div class="gray">
                     <Row type="flex" justify="center">
@@ -19,26 +21,34 @@
                     <article v-html="article[0].content" v-highlight>
                     </article>
                 </Col>
-                <BackToTop></BackToTop>
+
             </Row>
+                <Random></Random>
         </div>
     </div>
+            <BackToTop></BackToTop>
+       </Content>
+    </Layout>
 </template>
 
 <script>
     import BackToTop from '../components/BackToTop'
+    import Random from'../components/Random'
 
     export default {
         name: "ArticlePAge",
-        components:{
-            BackToTop
+        components: {
+            BackToTop,
+            Random
         },
+
         mounted: function () {
             this.getArticle()
-            document.querySelectorAll("table").forEach((el)=>{
-                el.className='table';
+            document.querySelectorAll("table").forEach((el) => {
+                el.className = 'table';
             })
         },
+        watch:{"$route": "getArticle", },
 
         data() {
             return {
@@ -112,17 +122,16 @@
     article {
         margin-top: 20px;
         font-size: 16px;
-        p{
-            font-size:16px;
-            line-height:1.5em;
-            padding:10px;
-            margin:0;
+        p {
+            font-size: 16px;
+            line-height: 1.5em;
+            padding: 10px;
+            margin: 0;
         }
-        blockquote{
+        blockquote {
             padding: 16px 0 16px 24px;
             font-size: 18px;
             font-weight: 300;
         }
-
     }
 </style>
