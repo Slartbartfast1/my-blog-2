@@ -5,8 +5,8 @@
                 <Icon type="md-home" size="22"/>
             </div>
         </router-link>
-        <router-link v-for="item in tags" :to="{path:'/tag',query:{tag:item.id,name:item.categories}}">
-            <div class="tag">{{item.categories}}</div>
+        <router-link v-for="item in tags" :to="{path:'/tag',query:{tag:item.id,name:item.categories}}" >
+            <div class="tag"  >{{item.categories}}</div>
         </router-link>
     </div>
 </template>
@@ -17,7 +17,7 @@
             this.getTags()
         },
         updated: function () {
-            this.getTags()
+
         },
         name: "Tags",
         data() {
@@ -41,7 +41,6 @@
         margin: 48px auto 48px auto;
         text-align: center;
         vertical-align: center;
-
         .tag {
             cursor: pointer;
             display: inline-block;
