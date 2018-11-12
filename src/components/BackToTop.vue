@@ -17,10 +17,10 @@
                     : document.getElementsByClassName('backToTop')[0].className = 'backToTop';
             },
             goTop() {
-                var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
                 if (currentScroll > 0) {
                     window.requestAnimationFrame(this.goTop);//最小动画帧数
-                    window.scrollTo(0, currentScroll - (currentScroll / 5));
+                    window.scrollTo(0, currentScroll - (currentScroll / 6));
                 }
             }
         },
