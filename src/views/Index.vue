@@ -5,7 +5,7 @@
             </Header>
             <Content>
                 <Row type="flex" justify="center">
-                    <Col span="15">
+                    <Col span="14">
                         <AuthorBox></AuthorBox>
                     </Col>
                 </Row>
@@ -24,6 +24,7 @@
     import HeadNav from '../components/HeadNav'
     import Footer1 from '../components/Footer1'
     import BackToTop from '../components/BackToTop'
+    // import LoadMore from '../components/LoadMore'
 
     export default {
         name: "Index",
@@ -33,41 +34,25 @@
             Footer1,
             FeaturedAndLatest,
             BackToTop,
+
         },
 
     }
 </script>
 
-<style scoped lang="scss">
-    .highlight {
-        &:after {
-            display: block;
-            content: "";
-            height: 3px;
-            width: 0px;
-            background-color: #0082a7;
-            transition: width .5s ease;
-        }
-        &:hover {
-            &:after {
-                width: 100%;
-            }
-
-        }
+<style lang="scss">
+    .ivu-card-body{
+        padding:0 !important;
     }
     #hero {
         /*<!--background:no-repeat 0 -600px  url(https://cdn.vuetifyjs.com/images/parallax/material2.jpg);-->*/
-    }
-
-    .ivu-card {
-        margin: 48px 0;
     }
     .ivu-layout-header {
         background-color: #ddd;
         padding: 0;
     }
     .ivu-layout-content {
-        background-color: #fff;
+        background-color: #ddd;
     }
 
 </style>
