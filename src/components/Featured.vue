@@ -1,11 +1,8 @@
 <template>
     <div class="featured">
         <Card v-for="item in featured" :key="item.articleid">
-            <div class="imgTitle"
-                 v-src="'http://58.87.107.26/'+item.imgurl">
-                <img
-                        :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)"
-                        alt="标题图片" class="img-thumb">
+            <div class="imgTitle" v-src="'http://58.87.107.26/'+item.imgurl">
+                <img :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)" alt="标题图片" class="img-thumb">
             </div>
             <div class="title">
                 <router-link :to="{path:'/article',query:{id:item.articleid}}">
@@ -15,13 +12,6 @@
             <div class="summary">
                 <i>{{item.gist}}</i>
             </div>
-            <!--<div class="boxBottom">-->
-                <!--<Icon type="ios-thumbs-up-outline" size="26"/>-->
-                <!--<span class="good"> 1111</span>-->
-                <!--<div class="comment"><span>{{item.view}} responses</span>-->
-                    <!--<Icon type="ios-text-outline" size="26"/>-->
-                <!--</div>-->
-            <!--</div>-->
         </Card>
     </div>
 
@@ -60,7 +50,6 @@
                     element.style.zIndex = '200'
                     element.style.transform = 'scale(1.1)'
                     element.src = binding.value
-                    element.style.filter='blur(20px)'
                     element.style.transition='.3s ease all'
                     element.onload=function(){
                         element.style.filter='blur(0px)'
@@ -84,7 +73,6 @@
         .imgTitle {
             height: 200px;
             width: 100%;
-            /*margin-top: 10px;*/
             text-align: center;
             overflow: hidden;
             position: relative;
