@@ -26,7 +26,7 @@
                 display: block;
                 content: "";
                 height: 3px;
-                width: 0px;
+                width: 0;
                 background-color: #0082a7;
                 transition: width .5s ease;
             }
@@ -34,7 +34,6 @@
                 &:after {
                     width: 100%;
                 }
-
             }
         }
         #hero {
@@ -42,14 +41,14 @@
         }
 
         .ivu-card {
-            margin: 48px 0;
+            margin: 24px 0;
         }
         .ivu-layout-header {
             background-color: #ddd;
             padding: 0;
         }
         .ivu-layout-content {
-            background-color: #fff;
+            background-color: #fcfcfc;
         }
 
     }
