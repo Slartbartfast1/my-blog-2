@@ -1,54 +1,58 @@
 <template>
     <Layout>
         <Content>
-    <div>
-        <div v-for="item in article" :key="item.articleid">
-            <div class="imgTitle" :style="background">
-                <div class="gray">
-                    <Row type="flex" justify="center">
-                        <Col span="13">
-                            <div class="heading">
-                                <div class="tag">{{item.categoryName}}</div>
-                                <h1>{{item.title}}</h1>
-                                <span>{{item.createTime}}</span>
-                            </div>
+            <div>
+                <div v-for="item in article" :key="item.articleid">
+                    <div class="imgTitle" :style="background">
+                        <div class="gray">
+                            <Row type="flex" justify="center">
+                                <Col span="13">
+                                    <div class="heading">
+                                        <div class="tag">{{item.categoryName}}</div>
+                                        <h1>{{item.title}}</h1>
+                                        <span>{{item.createTime}}</span>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </div>
+                    <Row type="flex" >
+                        <Col span="13" offset="5">
+                            <article v-html="article[0].content" v-highlight>
+                            </article>
+                        </Col>
+                        <Col span="4">
+                            <Catalog></Catalog>
                         </Col>
                     </Row>
+                    <Random></Random>
                 </div>
             </div>
-            <Row type="flex" justify="center">
-                <Col span="13">
-                    <article v-html="article[0].content" v-highlight>
-                    </article>
-                </Col>
-
-            </Row>
-                <Random></Random>
-        </div>
-    </div>
             <BackToTop></BackToTop>
-       </Content>
+        </Content>
     </Layout>
 </template>
 
 <script>
     import BackToTop from '../components/BackToTop'
-    import Random from'../components/Random'
+    import Random from '../components/Random'
+    import Catalog from '../components/Catalog'
 
     export default {
         name: "ArticlePAge",
         components: {
             BackToTop,
-            Random
+            Random,
+            Catalog
         },
 
         mounted: function () {
-            this.getArticle()
+            this.getArticle();
             document.querySelectorAll("table").forEach((el) => {
                 el.className = 'table';
             })
         },
-        watch:{"$route": "getArticle", },
+        watch: {"$route": "getArticle",},
 
         data() {
             return {
