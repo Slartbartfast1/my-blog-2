@@ -23,11 +23,29 @@ app.get('/featured', (req, res) => {
 
 //时间排序
 app.get('/latest', (req, res) => {
-    let params = +req.query.load || 4;
-    $sql.mySelect(`select articleid,title,gist,createTime,author,imgurl,category,view from article where top=2 and articleid!=228 order by createTime desc limit 0,${params} `, (data) => {
-        let rows = JSON.stringify(data);
-        res.send(rows)
-    })
+    if(req.query.total){
+        $sql.mySelect(`select count(1) as num from article where top=2 and articleid!=228`, (data) => {
+            let rows = JSON.stringify(data);
+            res.send(rows)
+        })
+    }else{
+        if(!req.query.start){
+            let params = +req.query.offset || 4;
+            $sql.mySelect(`select articleid,title,gist,createTime,author,imgurl,category,view from article where top=2 and articleid!=228 order by createTime desc limit 0,${params} `, (data) => {
+                let rows = JSON.stringify(data);
+                res.send(rows)
+            })
+        }else{
+            let start=req.query.start;
+            let size=req.query.size;
+            $sql.mySelect(`select articleid,title,gist,createTime,author,imgurl,category,view from article where top=2 and articleid!=228 order by createTime desc limit ${start},${size} `, (data) => {
+                let rows = JSON.stringify(data);
+                res.send(rows)
+            })
+        }
+
+    }
+
 });
 
 //获得标签名称
@@ -41,11 +59,27 @@ app.get('/tags/name', (req, res) => {
 //获得文章列表
 app.get('/tags/article', (req, res) => {
     let id = req.query.tag;
-    $sql.mySelect(`select * from article where articleid!=228 and category=${id}`, (data) => {
+    $sql.mySelect(`select * from article where articleid!=228 and category=${id} order by createTime desc`, (data) => {
         let rows = JSON.stringify(data);
         res.send(rows)
     })
 });
+
+app.get('/random',(req,res)=>{
+    let limit=req.query.limit;
+    $sql.mySelect(`select 
+    articleid,
+    author,
+    title, 
+    imgurl,
+    createTime
+    from article where articleid!=228 
+    order by rand() limit ${limit}`
+        ,(data) => {
+            let rows = JSON.stringify(data);
+            res.send(rows)
+        })
+})
 
 //获得文章内容
 app.get('/article', (req, res) => {
@@ -70,7 +104,8 @@ app.get('/article', (req, res) => {
         let rows = JSON.stringify(data);
         res.send(rows)
     })
-})
+});
+
 
 
 app.listen(8001, () => {
