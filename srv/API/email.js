@@ -1,14 +1,11 @@
 'use strict';
-
-
-
+const nodemailer = require('nodemailer');
 // var emailTo='1019118008@qq.com';
 // var emailSubject='HEllo'
 // var emailContent='<b>有人回复你了</b>';
 
-const nodemailer = require('nodemailer');
 
-let transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
     // host: 'smtp.ethereal.email',
     service: 'qq', // 使用了内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known/
     port: 465, // SMTP 端口
@@ -18,7 +15,6 @@ let transporter = nodemailer.createTransport({
         pass: 'irrjbpgbenfnbfcd',
     }
 });
-
 
 function sendMail(emailTo,emailSubject,emailContent){
     let mailOptions = {
