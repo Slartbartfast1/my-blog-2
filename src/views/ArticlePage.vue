@@ -30,6 +30,7 @@
             </div>
             <BackToTop></BackToTop>
         </Content>
+        <Footer></Footer>
     </Layout>
 </template>
 
@@ -124,9 +125,12 @@
     }
 
     article {
+        background-color: #fff;
         margin-top: 20px;
         font-size: 16px;
+        font-family: '楷体';
         p {
+
             font-size: 16px;
             line-height: 1.5em;
             padding: 10px;
