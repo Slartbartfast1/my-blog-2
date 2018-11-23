@@ -3,9 +3,10 @@
         <div class="catalog">
             <div class="catalogTitle">目录</div>
             <div class="catalogBody">
+                <div class="highlightTitle" :style="'top:'+this.Top+'px'"></div>
                 <ul>
                     <li v-for="(item,i) in titles"
-                        :class="'item '+item.WT+' i'+item.i"
+                        :class="'item '+item.WT+' i'+item.index"
                         :key="item.index"
                         @click="scrollToAnchor(i)">
                         {{item.text}}
@@ -26,13 +27,14 @@
         data() {
             return {
                 titles: [],
+                Top: 30,
             }
         },
         methods: {
             scrollToAnchor(index) {
                 let offset = this.titles[index].offset;
                 window.scrollTo({
-                    top: offset-20 ,
+                    top: offset,
                     behavior: "smooth"
                 });
             },
@@ -40,10 +42,12 @@
             scrollListener() {
                 let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
                 let len = this.titles.length;
-                let min = 10000;
+                let min = Math.abs(currentScroll - this.titles[0].offset);
                 let minIndex = 0;
+                let ul = document.querySelector('.catalogBody ul');
+                let per = ul.offsetHeight / len;
                 for (let i = 0; i < len; i++) {
-                    if (currentScroll - this.titles[i].offset >0) {
+                    if (currentScroll - this.titles[i].offset > -40) {
                         let dis = Math.abs(currentScroll - this.titles[i].offset);
                         if (dis <= min) {
                             min = dis;
@@ -51,25 +55,26 @@
                         }
                     }
                 }
-                let el = document.querySelectorAll(`ul li`)[minIndex];
-                let all = document.querySelectorAll(`ul li`);
+                let el = document.querySelectorAll('.item')[minIndex];
+                let all = document.querySelectorAll('.item');
                 Array.prototype.forEach.call(all, el => {
                     this.removeActive(el)
                 });
+                this.Top = minIndex * per;
                 this.addActive(el);
+
+                console.log(this.Top)
             },
 
             removeActive(obj) {
                 let obj_class = obj.className + '';
-                let removed = obj_class.replace(' active', '');
-                obj.className = removed;
+                obj.className = obj_class.replace(' active', '');
             },
 
             addActive(obj) {
                 let obj_class = obj.className;
-                if (obj_class.indexOf('active') >= 0) return;
-                let added = obj_class + ' active';
-                obj.className = added;
+                if (obj_class.indexOf('active') !== -1) return;
+                obj.className = obj_class + ' active';
             },
 
             catchHeader() {
@@ -97,6 +102,7 @@
         width: 100%;
         background-color: #FCFCFC;
         margin-left: 16px;
+
         .catalogTitle {
             background-color: #fff;
             padding: 4px 0 4px 12px;
@@ -106,27 +112,46 @@
         }
 
         .catalogBody {
+            position: relative;
+
+            .highlightTitle {
+                cursor: pointer;
+                height: 30px;
+                position: absolute;
+                display: block;
+                left: 0;
+                right: 0;
+                z-index: 2;
+                border-left: 3px solid #0082a7;
+                transition: all .1s ease;
+            }
+
             ul {
+
                 padding-left: 0 !important;
+                position: relative;
 
                 .item {
-                    &:hover {
-                        background-color: #DDD;
-                    }
-                    text-overflow:ellipsis;
+                    height: 30px;
+                    line-height: 30px;
+                    text-overflow: ellipsis;
                     cursor: pointer;
                     width: 100%;
                     background-color: #fff;
                     display: block;
                     position: relative;
-                    padding: 4px 0 4px 12px;
+                    padding-left: 12px;
                     white-space: nowrap;
                     overflow: hidden;
-                    text-overflow: ellipsis;
+                    z-index: 1;
+
+                    &:hover {
+                        color: #0082a7;
+                    }
                 }
 
                 .active {
-                    background-color: #DDD;
+                    color: #0082a7;
                 }
 
                 .d1 {
@@ -134,17 +159,17 @@
                 }
 
                 .d2 {
-                    padding-left: 20px;
+                    padding-left: 16px;
                     font-weight: 600;
                 }
 
                 .d3 {
-                    padding-left: 30px;
+                    padding-left: 24px;
                     font-weight: 400;
                 }
 
                 .d4, .d5 {
-                    padding-left: 40px;
+                    padding-left: 36px;
                     font-weight: 200;
                 }
             }
