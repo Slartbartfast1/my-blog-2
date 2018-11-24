@@ -37,6 +37,7 @@
                     top: offset,
                     behavior: "smooth"
                 });
+
             },
 
             scrollListener() {
@@ -62,8 +63,6 @@
                 });
                 this.Top = minIndex * per;
                 this.addActive(el);
-
-                console.log(this.Top)
             },
 
             removeActive(obj) {
@@ -113,7 +112,6 @@
 
         .catalogBody {
             position: relative;
-
             .highlightTitle {
                 cursor: pointer;
                 height: 30px;
@@ -123,11 +121,11 @@
                 right: 0;
                 z-index: 2;
                 border-left: 3px solid #0082a7;
-                transition: all .1s ease;
+                transition: all .2s ease;
+                background-color: rgba(0, 198, 238, .05);
             }
 
             ul {
-
                 padding-left: 0 !important;
                 position: relative;
 
@@ -145,6 +143,18 @@
                     overflow: hidden;
                     z-index: 1;
 
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        left: 4px;
+                        margin-top: -2px;
+                        width: 4px;
+                        height: 4px;
+                        background-color: currentColor;
+                        border-radius: 50%;
+                    }
+
                     &:hover {
                         color: #0082a7;
                     }
@@ -155,25 +165,47 @@
                 }
 
                 .d1 {
+                    padding-left: 12px;
                     font-weight: 800;
+
+                    &:before {
+                        width: 6px;
+                        height: 6px;
+                    }
                 }
 
                 .d2 {
                     padding-left: 16px;
                     font-weight: 600;
+
+                    &:before {
+                        left: 8px;
+                    }
                 }
 
                 .d3 {
                     padding-left: 24px;
                     font-weight: 400;
+
+                    &:before {
+                        left: 14px;
+                        width: 3px;
+                        height: 3px;
+                    }
                 }
 
                 .d4, .d5 {
                     padding-left: 36px;
                     font-weight: 200;
+                    font-size: .7rem;
+
+                    &:before {
+                        left: 24px;
+                        width: 2px;
+                        height: 2px;
+                    }
                 }
             }
-
         }
     }
 </style>
