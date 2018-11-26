@@ -1,12 +1,12 @@
-var express=require('express');
-var mysql=require('mysql');
-var connection=require('./config.js')
+const express=require('express');
+const mysql=require('mysql');
+const connection=require('./config.js');
 
 const pool = mysql.createPool(
     connection.info
-)
+);
 
-var $sql = {
+let $sql = {
     mySelect: function (select, callback) {
         pool.query(select, function (err, res) {
             if (err) {
@@ -16,8 +16,8 @@ var $sql = {
             }
         })
     },
-    myInsert: function (insert, callback = console.log) {
-        pool.query(insert, function (err, res) {
+    myInsert: function (table,comment, callback) {
+        pool.query(`insert into ${table} set ?`,comment, function (err, res) {
             if (err) {
                 console.log("添加失败：", err)
             } else {
@@ -25,7 +25,7 @@ var $sql = {
             }
         })
     },
-    myUpdata: function (updata, callback = console.log) {
+    myUpdata: function (updata, callback=console.log) {
         pool.query(updata, function (err, res) {
             if (err) {
                 console.log("更新失败：", err)
@@ -44,7 +44,6 @@ var $sql = {
             }
         )
     }
-
 };
 
 
