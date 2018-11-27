@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 const $sql = require('./API/sql');
-const bodyParser=require('body-parser');
-const moment=require('moment');
-const sendEmail=require('./API/email.js');
+const bodyParser = require('body-parser');
+const moment = require('moment');
+const sendEmail = require('./API/email.js');
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // 跨域
 app.all('*', function (req, res, next) {
@@ -50,9 +50,7 @@ app.get('/latest', (req, res) => {
                 res.send(rows)
             })
         }
-
     }
-
 });
 
 //获得标签名称
@@ -122,25 +120,24 @@ app.get('/comments', (req, res) => {
         })
 });
 
+//评论+邮箱提示
 app.post('/comments', (req, res) => {
-    req.body.date=moment().format();
-    console.log(req.body.content.match(/@\w+:/));
-    if(req.body.content.match(/^@\w?[[\u4e00-\u9fa5]+\]?:/)){//匹配内容
-        let name=req.body.content.match(/@\w?[[\u4e00-\u9fa5]+\]?:/)[0].slice(1,-1);
-        let id=req.body.reply;
+    if (!req.body.name) {
+        req.body.name = '匿名者'
+    }
+    req.body.date = moment().format();
+    if (req.body.content.match(/^@\w?[[\u4e00-\u9fa5]+\]?:/)) {
+        let id = req.body.reply;
         let email;
-        $sql.mySelect(`select email from comments where id=${id}`,res=>{
-            email=res[0].email;
-            console.log(email);
-            sendEmail(email,`${req.body.name}回复了你的评论`,`点击查看`)
+        $sql.mySelect(`select email from comments where id=${id}`, res => {
+            email = res[0].email;
+            sendEmail(email, `${req.body.name}回复了你的评论`, `点击查看`)
         })
     }
-
-    if(!req.body.name){
-        req.body.name='匿名者'
-    }
-    $sql.myInsert('comments',req.body
-        ,data=>res.send(data));
+    sendEmail(`1019118008@qq.com`, `${req.body.name}评论了你的博客`, `点击查看`);
+    //TODO:点击查看功能
+    $sql.myInsert('comments', req.body
+        , data => res.send(data));
 });
 
 
