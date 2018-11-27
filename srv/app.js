@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const $sql = require('./API/sql');
 const bodyParser=require('body-parser');
+const moment=require('moment');
+const sendEmail=require('./API/email.js');
 
 
 app.use(bodyParser.json());
@@ -12,7 +14,7 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", ' 3.2.1')
+    res.header("X-Powered-By", ' 3.2.1');
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
@@ -84,7 +86,7 @@ app.get('/random', (req, res) => {
             let rows = JSON.stringify(data);
             res.send(rows)
         })
-})
+});
 
 //获得文章内容
 app.get('/article', (req, res) => {
@@ -121,9 +123,24 @@ app.get('/comments', (req, res) => {
 });
 
 app.post('/comments', (req, res) => {
-    console.log(req.body);
+    req.body.date=moment().format();
+    console.log(req.body.content.match(/@\w+:/));
+    if(req.body.content.match(/^@\w?[[\u4e00-\u9fa5]+\]?:/)){//匹配内容
+        let name=req.body.content.match(/@\w?[[\u4e00-\u9fa5]+\]?:/)[0].slice(1,-1);
+        let id=req.body.reply;
+        let email;
+        $sql.mySelect(`select email from comments where id=${id}`,res=>{
+            email=res[0].email;
+            console.log(email);
+            sendEmail(email,`${req.body.name}回复了你的评论`,`点击查看`)
+        })
+    }
+
+    if(!req.body.name){
+        req.body.name='匿名者'
+    }
     $sql.myInsert('comments',req.body
-        ,data=>console.log('添加成功'));
+        ,data=>res.send(data));
 });
 
 
