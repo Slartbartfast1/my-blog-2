@@ -1,6 +1,8 @@
 <template>
     <Row type="flex" justify="center" class="random">
-        <div class="luck" ><Button type="primary" shape="circle" icon="md-refresh" :loading="loading" @click="getRandom"></Button></div>
+        <div class="luck">
+            <Button type="primary" shape="circle" icon="md-refresh" :loading="loading" @click="getRandom"></Button>
+        </div>
         <div class="randomItem" v-for="item in random" :key="item.articleid">
             <router-link :to="{path:'/article',query:{id:item.articleid}}">
                 <div class="img">
@@ -8,9 +10,9 @@
                 </div>
             </router-link>
             <div class="title">
-                <span>{{item.author+' '+item.createTime.slice(0,10)+':'}}</span>
+                <span>{{item.author+' '+item.createTime.slice(0,10)}}</span>
                 <router-link :to="{path:'/article',query:{id:item.articleid}}">
-                <p>{{item.title}}</p>
+                    <p>{{item.title}}</p>
                 </router-link>
             </div>
         </div>
@@ -21,25 +23,24 @@
 <script>
     export default {
         name: "Random",
-        mounted:function(){
+        mounted: function () {
             this.getRandom();
-
         },
-        data(){
-            return{
-                random:[],
-                loading:false
+        data() {
+            return {
+                random: [],
+                loading: true,
             }
         },
-        methods:{
-          getRandom(){
-              this.loading=true
-              this.$http.get(`http://localhost:8001/random?limit=4`)
-                  .then((res) => {
-                      this.random=res.body;
-                      this.loading=false
-                  })
-          }
+        methods: {
+            getRandom() {
+                this.loading = true;
+                this.$http.get(`http://localhost:8001/random?limit=4`)
+                    .then((res) => {
+                        this.random = res.body;
+                        this.loading = false;
+                    })
+            },
         },
     }
 </script>
@@ -51,54 +52,65 @@
         width: 100%;
         align-items: center;
         position: relative;
-        .randomItem{
-            width:14vw;
-            height:14vw;
+
+        .randomItem {
+            width: 14vw;
+            height: 14vw;
             background-color: #fff;
-            margin:0 1vw;
+            margin: 0 1vw;
             position: relative;
-            transition:box-shadow 1s ease;
-            &:hover{
-                box-shadow: 0 1px 10px 1px rgba(0,0,0,.1);
-                margin-top:-5px;
+            transition: box-shadow 1s ease;
+
+            &:hover {
+                box-shadow: 0 1px 10px 1px rgba(0, 0, 0, .1);
+                margin-top: -5px;
             }
-            .img{
-                overflow:hidden;
-                height:8vw;
-                width:100%;
-                img{
+
+            .img {
+                overflow: hidden;
+                height: 8vw;
+                width: 100%;
+
+                img {
                     transition: all ease .3s;
-                    &:hover{
+
+                    &:hover {
                         transform: scale(1.1);
                     }
-                    height:100%;
-                    width:100%;
+
+                    height: 100%;
+                    width: 100%;
                 }
             }
-            .title{
-                height:6vw;
-                width:98%;
-                position:absolute;
-                left:50%;
+
+            .title {
+                height: 6vw;
+                width: 98%;
+                position: absolute;
+                left: 50%;
                 transform: translateX(-50%);
-                margin-top:-1vw;
+                margin-top: -1vw;
                 z-index: 1;
                 background-color: #fff;
-                span{
-                    font-size:.6rem;
-                    color:#999;
+
+                span {
+                    padding: 5px;
+                    font-size: .6rem;
+                    color: #999;
                 }
-                p{
+
+                p {
                     font-size: 1rem;
-                    color:black;
+                    color: black;
                     text-align: center;
-                    padding:15px
+                    padding: 15px
                 }
             }
         }
-        .luck{
-           position: absolute;
-            top:0;
+
+        .luck {
+            position: absolute;
+            top: 0;
             transform: translateY(-50%);
         }
     }
