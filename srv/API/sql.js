@@ -1,6 +1,6 @@
 const express=require('express');
 const mysql=require('mysql');
-const connection=require('./config.js');
+const connection=require('./configs/mysqlConfig.js');
 
 const pool = mysql.createPool(
     connection.info
@@ -16,17 +16,17 @@ let $sql = {
             }
         })
     },
-    myInsert: function (table,comment, callback) {
-        pool.query(`insert into ${table} set ?`,comment, function (err, res) {
+    myInsert: function (table,values, callback) {
+        pool.query(`insert into ${table} set ?`,values, function (err, res) {
             if (err) {
-                console.log("添加失败：", err)
+                callback('添加失败')
             } else {
-                callback(res)
+                callback('添加成功')
             }
         })
     },
-    myUpdata: function (updata, callback=console.log) {
-        pool.query(updata, function (err, res) {
+    myUpdata: function (query,values, callback=console.log) {
+        pool.query(query,obj, function (err, res) {
             if (err) {
                 console.log("更新失败：", err)
             } else {
