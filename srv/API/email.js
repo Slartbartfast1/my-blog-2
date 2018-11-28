@@ -19,7 +19,7 @@ function sendMail(to,subject,content){
         subject: subject, // Subject line
         // 发送text或者html格式
         // text: 'Hello world?', // plain text body
-        html: `<b>${content}</b>` // html body
+        html: content // html body
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
