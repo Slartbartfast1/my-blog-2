@@ -59,7 +59,7 @@ app.get('/tags/name', (req, res) => {
         let rows = JSON.stringify(data);
         res.send(rows)
     })
-})
+});
 
 //获得文章列表
 app.get('/tags/article', (req, res) => {
@@ -126,16 +126,25 @@ app.post('/comments', (req, res) => {
         req.body.name = '匿名者'
     }
     req.body.date = moment().format();
-    if (req.body.content.match(/^@\w?[[\u4e00-\u9fa5]+\]?:/)) {
+    //正则匹配是否是回复别人的评论
+    if (req.body.content.match(/^@[\u4e00-\u9fa5_a-zA-Z0-9]+:/)&&req.body.reply) {
         let id = req.body.reply;
         let email;
-        $sql.mySelect(`select email from comments where id=${id}`, res => {
+        let url;
+        let name;
+        let content;
+        $sql.mySelect(`select * from comments where id=${id}`, res => {
             email = res[0].email;
-            sendEmail(email, `${req.body.name}回复了你的评论`, `点击查看`)
+            url = res[0].url;
+            name = res[0].name;
+            content = res[0].content;
+            sendEmail(email,
+                `${req.body.name}回复了你的评论`,
+                `<p>${name}:</p><blockquote style="padding:10px;color:white;background-color: rgba(0, 130, 167, 0.26);">${content}</blockquote><a href="${url}">点击查看</a>`)
         })
     }
-    sendEmail(`1019118008@qq.com`, `${req.body.name}评论了你的博客`, `点击查看`);
-    //TODO:点击查看功能
+    sendEmail(`1019118008@qq.com`, `${req.body.name}评论了你的博客`,
+        `<p>${req.body.name}:</p><blockquote style="padding:10px;color:white;background-color: rgba(0, 130, 167, 0.26);">${req.body.content}</blockquote><a href="${req.body.url}">点击查看</a>`);
     $sql.myInsert('comments', req.body
         , data => res.send(data));
 });
