@@ -2,8 +2,10 @@
     <keep-alive>
         <div class="tags">
             <Card v-for="(item,index) in tags" :key="item.slug">
-                <div class="imgTitle" v-html="html[index]" v-src="'http://58.87.107.26/'+item.imgurl">{{html[index]}}
-                </div>
+                <router-link :to="{path:'/article',query:{id:item.articleid}}">
+                    <div class="imgTitle" v-html="html[index]" v-src="'http://58.87.107.26/'+item.imgurl">{{html[index]}}
+                    </div>
+                </router-link>
                 <div class="title">
                     <router-link :to="{path:'/article',query:{id:item.articleid}}">
                         <p>{{item.title}}</p>
@@ -13,7 +15,6 @@
                     <i>{{item.gist}}</i>
                 </div>
             </Card>
-
         </div>
     </keep-alive>
 </template>
@@ -62,7 +63,6 @@
                     element.style.height = '200px'
                     element.style.zIndex = '200'
                     element.style.transform = 'scale(1.1)'
-
                     element.src = binding.value
                     element.style.filter = 'blur(20px)'
                     element.style.transition = '.3s ease all'
@@ -149,8 +149,7 @@
             position: relative;
             word-break: break-word;
             color: rgba(0, 0, 0, .7);
-            font-size: .8rem;
-
+            font-size: 12px;
         }
     }
 </style>
