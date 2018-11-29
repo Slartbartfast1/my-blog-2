@@ -1,7 +1,7 @@
 <template>
-    <div class="backToTop hide" @click="goTop()">
+    <button class="backToTop hide" @click="goTop()">
         <Icon type="md-arrow-up" size="16"/>
-    </div>
+    </button>
 </template>
 
 <script>
@@ -12,10 +12,10 @@
         },
         methods: {
             hide() {
-                let el=document.getElementsByClassName('backToTop')[0];
+                let el = document.getElementsByClassName('backToTop')[0];
                 window.pageYOffset < 1400 ?
                     el.className = 'backToTop hide'
-                    :el.className = 'backToTop';
+                    : el.className = 'backToTop';
             },
 
             goTop() {
@@ -33,6 +33,7 @@
 
 <style scoped lang="scss">
     .backToTop {
+        outline: none;
         position: fixed;
         right: 40px;
         bottom: 30px;
@@ -44,6 +45,7 @@
         text-align: center;
         transition: all .3s ease, background-color 0s;
         cursor: pointer;
+
         &:hover {
             box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, .1);
             background-color: #f7f7f7;
@@ -53,7 +55,7 @@
 
     .hide {
         right: -37px;
-        transform:rotateZ(180deg);
+        transform: rotateZ(180deg);
         border-radius: 0;
     }
 
