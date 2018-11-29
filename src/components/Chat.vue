@@ -7,6 +7,7 @@
         </button>
         <div :class="'wrap animated '+show" v-show="show">
             <div class="chat">
+                <div class="pingLun">评论</div>
                 <div class="history">
                     <div class="sofa" v-if="!comments.length">还没有人评论呢(～ o ～)</div>
                     <div class="comments animated fadeIn" v-for="(item,i) in comments">
@@ -131,15 +132,22 @@
 </script>
 
 <style scoped lang="scss">
-
     .commentsWindow {
+        height: 600px;
+        width: inherit;
+        position: fixed;
+
         .fadeOut {
             display: none;
         }
 
         .commentsButton {
-            width: 50px;
-            height: 50px;
+            &:active {
+                box-shadow: 0 2px 3px 1px rgba(0, 0, 0, .1) inset;
+            }
+
+            min-width: 50px;
+            min-height: 50px;
             position: fixed;
             top: 50%;
             outline: none;
@@ -158,21 +166,26 @@
             background-color: #ddd;
             position: fixed;
             top: 20%;
-            margin-left: 60px;
-            overflow: hidden;
+            margin-left: 56px;
             z-index: 999;
+            width: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+
+            .pingLun {
+                text-align: center;
+                font-size: medium;
+                background-color: #fff;
+            }
 
             .history {
                 height: 400px;
-                width: 600px;
                 background-color: #fff;
                 padding-top: 10px;
                 overflow: scroll;
-                font-size: 18px;
+                font-size: small;
 
                 .sofa {
                     height: 60px;
-                    width: 100%;
                 }
 
                 .post {
@@ -196,7 +209,7 @@
                     }
 
                     &:nth-child(odd) {
-                        background-color: #f8f8f8;
+                        background-color: rgba(212, 212, 212, 0.29);
                     }
 
                     &:hover {
@@ -210,7 +223,7 @@
             }
 
             .inputBox {
-                font-size: 16px;
+                font-size: small;
                 height: 50%;
 
                 input, textarea {
@@ -222,9 +235,8 @@
 
                 .name, .email {
                     width: 50%;
-                    height: 50px;
                     display: inline-block;
-                    background-color: rgba(246, 246, 246, 0.96);
+                    background-color: rgba(233, 233, 233, 0.11);
 
                 }
 
@@ -238,17 +250,18 @@
             }
 
             .content {
-                height: 50px;
+
                 background-color: #fff;
-                padding-right: 50px;
+                padding-right: 150px;
 
                 button {
                     transition: .2s all ease;
                     border-left: rgba(0, 0, 0, .1) solid 1px;
                     outline: none;
                     position: absolute;
-                    width: 50px;
-                    height: 50px;
+                    width: 150px;
+                    background-color: rgba(3, 234, 249, 0.07);
+                    font-size: small;
 
                     &:disabled {
                         background-color: rgba(2, 57, 60, 0.34);
@@ -261,7 +274,7 @@
                     }
 
                     &:hover {
-                        background-color: rgb(5, 105, 112);
+                        background-color: rgb(9, 179, 191);
                         color: #fff;
                     }
                 }
