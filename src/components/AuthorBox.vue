@@ -1,9 +1,9 @@
 <template>
     <div class="author">
-        <div class="avatar animated"  v-bind:class="random" @click="animation" >
-            <img src="https://slartbartfast.cn/admin/avatar/avatar%20(1)_gaitubao_com_296x296.png"
-                                 alt=""></div>
-        <div class="nickName" >
+        <div class="avatar animated" v-bind:class="random" @click="animation">
+            <img src="../../public/avatar1.png"
+                 alt=""></div>
+        <div class="nickName">
             <h1 class="underline">泛银河系含漱爆破液</h1>
             <div></div>
             <ButtonGroup>
@@ -13,17 +13,17 @@
                 <Button icon="ios-at" type="dashed"></Button>
             </ButtonGroup>
         </div>
-        <divider></divider>
-            <Tags></Tags>
+        <Tags></Tags>
     </div>
 </template>
 
 <script>
     import 'animate.css'
     import Tags from '../components/Tags'
+
     export default {
         name: "AuthorBox",
-        components:{
+        components: {
             Tags
         },
         data() {
@@ -68,58 +68,58 @@
                     'zoomInRight',
                     'zoomInUp',
                     'heartBeat'],
-                random:'tada',
-
+                random: 'tada',
             }
         },
-        methods:{
-            animation:function(){
-                var num=Math.random()*this.animate.length;
-                this.random=this.animate[num.toFixed(0)];
-                console.log(this.random)
+        methods: {
+            animation: function () {
+                var num = Math.random() * this.animate.length;
+                this.random = this.animate[num.toFixed(0)];
             }
         }
     }
 </script>
 
-<style  lang="scss">
+<style lang="scss">
     .author {
-        background-color: #FFF;
         margin-top: 30px;
         position: relative;
 
         .avatar {
-
             cursor: pointer;
             margin: 96px auto 0 auto;
-position:relative;
-            top:-50px;
+            position: relative;
+            top: -50px;
             width: 160px;
             height: 160px;
             border-radius: 80px;
             box-shadow: 0 0 10px 1px rgba(0, 0, 0, .1);
             overflow: hidden;
+
             img {
                 width: 100%;
                 height: 100%;
             }
         }
+
         .nickName {
             display: block;
             margin: 20px auto 0 auto;
             text-align: center;
-            h1{
+
+            h1 {
                 display: inline-block;
             }
 
             .ivu-btn-group {
-                /*display: block;*/
                 margin-top: 10px;
+
                 .ivu-btn {
                     margin: 0 6px;
                 }
             }
         }
+
         .search {
             margin: 30px auto 0 auto;
             width: 80%;
@@ -131,12 +131,14 @@ position:relative;
             &:hover {
                 box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, .2);
             }
+
             .ivu-icon-ios-search {
                 color: #c7c9c9;
                 margin-bottom: 16px;
-                transition:.3s ease all;
+                transition: .3s ease all;
 
             }
+
             .input {
                 border: none;
                 outline: none;
@@ -147,6 +149,7 @@ position:relative;
                 width: 80%;
                 color: #767878;
             }
+
             border-radius: 3px;
 
             .ivu-input-wrapper {
