@@ -89,18 +89,18 @@
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);
-                margin-top: -1vw;
+                margin-top: -10px;
                 z-index: 1;
                 background-color: #fff;
 
                 span {
                     padding: 5px;
-                    font-size: .6rem;
+                    font-size: 8px;
                     color: #999;
                 }
 
                 p {
-                    font-size: 1rem;
+                    font-size: 16px;
                     color: black;
                     text-align: center;
                     padding: 15px
