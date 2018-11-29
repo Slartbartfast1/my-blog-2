@@ -37,7 +37,6 @@
                     top: offset,
                     behavior: "smooth"
                 });
-
             },
 
             scrollListener() {
@@ -47,6 +46,7 @@
                 let minIndex = 0;
                 let ul = document.querySelector('.catalogBody ul');
                 let per = ul.offsetHeight / len;
+                let all = document.querySelectorAll('.item');
                 for (let i = 0; i < len; i++) {
                     if (currentScroll - this.titles[i].offset > -40) {
                         let dis = Math.abs(currentScroll - this.titles[i].offset);
@@ -57,7 +57,6 @@
                     }
                 }
                 let el = document.querySelectorAll('.item')[minIndex];
-                let all = document.querySelectorAll('.item');
                 Array.prototype.forEach.call(all, el => {
                     this.removeActive(el)
                 });
@@ -107,11 +106,12 @@
             padding: 4px 0 4px 12px;
             width: 100%;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 16px;
         }
 
         .catalogBody {
             position: relative;
+
             .highlightTitle {
                 cursor: pointer;
                 height: 30px;
