@@ -1,13 +1,12 @@
 
 <template>
     <div class="latest">
-        <Card v-for="item in latest">
-            <div class="imgTitle"
-                 v-src="'http://58.87.107.26/'+item.imgurl">
-                <img
-                        :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)"
-                        alt="标题图片" class="img-thumb">
-            </div>
+        <Card v-for="item in latest" :key="item.articleid">
+            <router-link :to="{path:'/article',query:{id:item.articleid}}">
+                <div class="imgTitle" v-src="'http://58.87.107.26/'+item.imgurl">
+                    <img :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)" alt="标题图片" class="img-thumb">
+                </div>
+            </router-link>
             <div class="title">
                 <router-link  :to="{path:'/article',query:{id:item.articleid}}">
                 <p>{{item.title}}</p>
@@ -47,7 +46,7 @@
             }
         },
         watch:{
-            start:function(val,oldVal){
+            start:function(val){
                 if(val>this.total-4){
                     this.start=this.total-4;
                 }
@@ -66,20 +65,6 @@
                         this.total=res.body[0]['num']
                     })
             },
-//             getMore(){
-// if(this.start!==this.total-4){
-//     if(document.body.scrollTop + window.innerHeight+1 >=
-//         document.body.offsetHeight ||
-//         document.documentElement.scrollTop + window.innerHeight+1 >=
-//         document.body.offsetHeight){
-//         this.start+=4;
-//         this.$http.get(`http://localhost:8001/latest?size=${this.size}&=${this.start}`)
-//             .then((res)=>{
-//                 this.latest=this.latest.concat(res.body)
-//             })
-//     }
-// }
-//             },
             loadMore(){
                 this.start+=4;
                 this.$http.get(`http://localhost:8001/latest?size=${this.size}&start=${this.start}`)
@@ -92,18 +77,18 @@
             src: {
                 bind: function (el, binding) {
                     var element = new Image();
-                    element.className = "img-src"
-                    element.style.width = '100%'
-                    element.style.height = '200px'
-                    element.style.zIndex = '200'
-                    element.style.transform = 'scale(1.1)'
+                    element.className = "img-src";
+                    element.style.width = '100%';
+                    element.style.height = '200px';
+                    element.style.zIndex = '200';
+                    element.style.transform = 'scale(1.1)';
                     element.src = binding.value;
-                    element.style.filter='blur(20px)'
-                    element.style.transition='.3s ease all'
+                    element.style.filter='blur(20px)';
+                    element.style.transition='.3s ease all';
                     element.onload=function(){
-                        element.style.transform = 'scale(1)'
-                        element.style.filter='blur(0px)'
-                        let obj = el.querySelector('.img-thumb')
+                        element.style.transform = 'scale(1)';
+                        element.style.filter='blur(0px)';
+                        let obj = el.querySelector('.img-thumb');
                         el.removeChild(obj)
                     };
                     el.appendChild(element)
@@ -160,7 +145,7 @@
             position: relative;
             word-break: break-word;
             color: rgba(0, 0, 0, .7);
-            font-size: .8rem;
+            font-size: 12px;
 
         }
     }
