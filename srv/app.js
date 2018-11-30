@@ -20,6 +20,9 @@ app.all('*', function (req, res, next) {
 });
 
 
+
+
+
 //精选
 app.get('/featured', (req, res) => {
     $sql.mySelect(`select articleid,title,gist,createTime,author,imgurl,category,view from article where top=1 and articleid!=228 `, (data) => {
@@ -150,9 +153,7 @@ app.post('/comments', (req, res) => {
 });
 
 
-app.listen(8001, () => {
-    console.log('连接成功');
-});
+
 
 
 
