@@ -2,12 +2,12 @@
     <keep-alive>
         <div class="tags">
             <Card v-for="(item,index) in tags" :key="item.slug">
-                <router-link :to="{path:'/article',query:{id:item.articleid}}">
-                    <div class="imgTitle" v-html="html[index]" v-src="'http://58.87.107.26/'+item.imgurl">{{html[index]}}
+                <router-link :to="{path:'/article1',query:{id:item.articleid}}">
+                    <div class="imgTitle" v-html="html[index]" v-src="'/'+item.imgurl.slice(14)">{{html[index]}}
                     </div>
                 </router-link>
                 <div class="title">
-                    <router-link :to="{path:'/article',query:{id:item.articleid}}">
+                    <router-link :to="{path:'/article1',query:{id:item.articleid}}">
                         <p>{{item.title}}</p>
                     </router-link>
                 </div>
@@ -78,12 +78,12 @@
         },
         methods: {
             getArticleByTag() {
-                this.$http.get(`http://localhost:8001/tags/article?tag=${this.$route.query.tag}`)
+                this.$http.get(`/tags/article?tag=${this.$route.query.tag}`)
                     .then((res) => {
                         this.tags = res.body;
                         this.html = [];
                         this.tags.forEach((el) => {
-                            var img = `<img src="http://58.87.107.26/${el.imgurl.slice(0, -4)}-thumb${el.imgurl.slice(-4)}" class="img-thumb" alt="标题图片"
+                            var img = `<img src="/${el.imgurl.slice(14, -4)}-thumb${el.imgurl.slice(-4)}" class="img-thumb" alt="标题图片"
                             style="width:100%;height:100% ;
                             filter: blur(30px);
                             transition: 1s all ease;
@@ -110,7 +110,6 @@
         .imgTitle {
             height: 200px;
             width: 100%;
-            /*margin-top: 10px;*/
             text-align: center;
             overflow: hidden;
             position: relative;
