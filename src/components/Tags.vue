@@ -5,7 +5,7 @@
                 <Icon type="md-home"/>
             </div>
         </router-link>
-        <router-link v-for="item in tags" :key="item.slug" :to="{path:'/tag',query:{tag:item.id,name:item.categories}}" >
+        <router-link v-for="item in tags" :key="item.slug" :to="{path:'/tag1',query:{tag:item.id,name:item.categories}}" >
             <div class="tag">{{item.categories}}</div>
         </router-link>
     </div>
@@ -24,7 +24,7 @@
         },
         methods: {
             getTags: function () {
-                this.$http.get('http://localhost:8001/tags/name')
+                this.$http.get('/tags/name')
                     .then((res) => {
                         this.tags = res.body
                     })
