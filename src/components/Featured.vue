@@ -1,14 +1,14 @@
 <template>
     <div class="featured">
         <Card v-for="item in featured" :key="item.articleid">
-            <router-link :to="{path:'/article',query:{id:item.articleid}}">
-                <div class="imgTitle" v-src="'http://58.87.107.26/'+item.imgurl">
-                    <img :src="'http://58.87.107.26/'+item.imgurl.slice(0, -4)+'-thumb'+item.imgurl.slice(-4)"
+            <router-link :to="{path:'/article1',query:{id:item.articleid}}">
+                <div class="imgTitle" v-src="'/'+item.imgurl.slice(14)">
+                    <img :src="'/'+item.imgurl.slice(14, -4)+'-thumb'+item.imgurl.slice(-4)"
                          alt="标题图片" class="img-thumb">
                 </div>
             </router-link>
             <div class="title">
-                <router-link :to="{path:'/article',query:{id:item.articleid}}">
+                <router-link :to="{path:'/article1',query:{id:item.articleid}}">
                     <p>{{item.title}}</p>
                 </router-link>
             </div>
@@ -35,7 +35,7 @@
         },
         methods: {
             getFeatured() {
-                this.$http.get('http://localhost:8001/featured')
+                this.$http.get('/featured')
                     .then((res) => {
                         this.featured = res.body
                     })
