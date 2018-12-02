@@ -1,6 +1,6 @@
 <template>
-    <Affix>
-        <div class="catalog">
+    <Affix >
+        <div class="catalog" :style="'margin-top:'+affix+'px'">
             <div class="catalogTitle">目录</div>
             <div class="catalogBody">
                 <div class="highlightTitle" :style="'top:'+this.Top+'px'"></div>
@@ -20,6 +20,10 @@
 <script>
     export default {
         name: "Catalog",
+        props: {
+            affix: Number,
+            required: true
+        },
         mounted: function () {
             this.catchHeader();
             window.addEventListener('scroll', this.scrollListener)
@@ -28,6 +32,7 @@
             return {
                 titles: [],
                 Top: 30,
+                affix: this.affix,
             }
         },
         methods: {
@@ -100,6 +105,7 @@
         width: 100%;
         background-color: #FCFCFC;
         margin-left: 16px;
+        transition:.4s all ease;
 
         .catalogTitle {
             background-color: #fff;
